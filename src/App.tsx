@@ -1,80 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import "antd/dist/antd.css";
-import MenuCommon from "./components/menu/Menu";
-import Slide from "./components/slider/Slide";
-import Navbar from "./components/Navbar/Navbar";
-import SlideScoll from "./components/slider/SlideScroll";
-import Banner from "./components/banner/Banner";
-import { Layout } from "antd";
-import ImageBanner from "./components/imageBanner/imageBanner";
-import Partners from "./components/partner/Partners ";
-import BannerBottom from "./components/banner/BannerBottom";
-import ProductCart from "./components/productCart/ProductCart";
-import InstaImage from "./components/instaImage/InstaImage";
-import ShoppingInfo from "./components/shoppingInfo/ShoppingInfo";
-import HeadBottom from "./components/HeadBottom/HeadBottom";
-import FooterCommon from "./Footer/Footer";
-
 import { render } from "react-dom";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
-import Home from "./pages/Home";
+import { Routes, Route, } from "react-router-dom";
+import WebsiteLayout from "./pages/layouts/WebsiteLayout";
+import HomePage from "./pages/Home";
+import CartPage from "./components/Cart/CartPage";
+import { ToastContainer, toast } from "react-toastify";
+import { addToCart } from "./pages/utils/cart";
+import { read } from "./components/api";
+import { ProductType } from "./pages/types/Product";
 
-const { Header, Footer, Content } = Layout;
 
 function App() {
+  const [cart, setCart] = useState<ProductType[]>([]);
+
+  const onHandleAddToCart = async (id: number) => {
+    const { data } = await read(id);
+    addToCart({ ...data, quantity: 1 }, function () {
+      toast.success(`Thêm ${data.name} vào giỏ hàng thành công!`);
+      setCart(JSON.parse(localStorage.getItem("cart") as string));
+    });
+  };
   return (
     <div className="app">
-      <Layout>
-        <Header>
-          <MenuCommon />
-        </Header>
-      </Layout>
-      <div className="slide" style={{ marginTop: " 30px" }}>
-        <Slide />
-      </div>
-      <Navbar />
-      <div className="slideScoll">
-        <SlideScoll />
-      </div>
-      <div className="newfeed">
-        <Banner />
-      </div>
-      <div>
-        <Partners />
-      </div>
-      <div className="image-banner">
-        <ImageBanner />
-      </div>
-      <div>
-        <BannerBottom />
-      </div>
-      <div className="product-slider slideScoll" style={{ marginBottom: 20 }}>
-        <h2>ÇOK SATANLAR</h2>
-        <SlideScoll />
-      </div>
-      <div className="product-cart">
-        <ProductCart />
-      </div>
-      <div className="slide-cart-bot">
-        <SlideScoll />
-      </div>
-      <div className="instagram">
-        <InstaImage />
-      </div>
-      <div className="shopping-info">
-        <ShoppingInfo />
-      </div>
-      <div className="head">
-        <HeadBottom />
-      </div>
-      <div>
-        <FooterCommon />
-      </div>
+      <Routes>
+        <Route
+          path="/"
+          element={<WebsiteLayout />}
+        >
+          <Route
+            index
+            element={
+              <HomePage onAddToCart={onHandleAddToCart} />
+            }
+          />
+          <Route
+            path="cart"
+            element={
+              <CartPage />
+            }
+          />
+        </Route>
+      </Routes>
+      <ToastContainer />
     </div >
   );
 }
