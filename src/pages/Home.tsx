@@ -13,15 +13,18 @@ import InstaImage from '../components/instaImage/InstaImage';
 import ShoppingInfo from '../components/shoppingInfo/ShoppingInfo';
 import HeadBottom from '../components/HeadBottom/HeadBottom';
 import FooterCommon from '../Footer/Footer';
-import { ProductType } from './types/Product';
 
-type Props = {
-    products: ProductType[];
-    onAddToCart: (cart: any) => void;
-};
+type ProductType = {
+    id: string,
+    title: string,
+    images: string,
+    price: number,
+    description: string,
+    category: string
+}
 const { Header } = Layout;
 
-const HomePage = (props: any) => {
+const HomePage = () => {
     return (
         <div>
             <Layout>
@@ -34,7 +37,7 @@ const HomePage = (props: any) => {
             </div>
             <Navbar />
             <div className="slideScoll">
-                <SlideScoll products={props.products} onAddToCart={props.onAddToCart} />
+                <SlideScoll />
             </div>
             <div className="newfeed">
                 <Banner />
@@ -50,13 +53,13 @@ const HomePage = (props: any) => {
             </div>
             <div className="product-slider slideScoll" style={{ marginBottom: 20 }}>
                 <h2>ÇOK SATANLAR</h2>
-                <SlideScoll products={props.products} onAddToCart={props.onAddToCart} />
+                <SlideScoll />
             </div>
             <div className="product-cart">
                 <ProductCart />
             </div>
             <div className="slide-cart-bot">
-                <SlideScoll products={props.products} onAddToCart={props.onAddToCart} />
+                <SlideScoll />
             </div>
             <div className="instagram">
                 <InstaImage />

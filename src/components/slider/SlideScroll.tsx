@@ -2,26 +2,30 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { Card, Button } from "antd";
 import Heart from '../../image/Heart.png'
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import axios from "axios"
+import { getProducts } from "../../api/product";
 
-type ProductListProps = {
-  products: any;
-  onAddToCart: (cart: any) => void;
-};
+type ProductType = {
+  id: string,
+  title: string,
+  images: string,
+  price: number,
+  description: string,
+  category: string
+}
 
 
-const SlideScoll = (props: ProductListProps) => {
-  const [products, setProducts] = useState<any[]>([])
+const SlideScoll = () => {
+  const [products, setProducts] = useState<ProductType[]>([])
+
+  const handleProducts = async () => {
+    const response = await getProducts();
+    setProducts(response.data);
+  }
+
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
-      .then(res => {
-        console.log(res)
-        return res.json()
-      })
-      .then(data => {
-        console.log(data)
-        setProducts(data)
-      })
+    handleProducts();
   }, [])
 
   const settings = {
@@ -65,26 +69,22 @@ const SlideScoll = (props: ProductListProps) => {
     <div className="slide-scroll-wrapper">
       <Slider {...settings}>
         {products.map((product) => (
-          <NavLink to={`/cart/`}>
-            <div className="slice-image">
-              <Card
-                hoverable
-                style={{ width: 240 }}
-                cover={<img alt="example" src={product.image} width="265" height="320" />}
-                className="heart"
-              >
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div className="slice-image">
+            <Card
+              hoverable
+              style={{ width: 240 }}
+              cover={<img alt="example" src={product.images} width="265" height="320" />}
+              className="heart"
+            >
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <Link to={`/products/${product.id}`}>
                   <Meta title={product.title} description={product.price} />
                   <Meta title="TL" />
-                </div>
-                <img className="heart-icon" src={Heart} alt="" />
-                <Button
-                  onClick={() => props.onAddToCart(product.id)} type="primary" style={{ marginTop: 15 }}>
-                  Add To Cart
-                </Button>
-              </Card>
-            </div>
-          </NavLink>
+                </Link>
+              </div>
+              <img className="heart-icon" src={Heart} alt="" />
+            </Card>
+          </div>
 
         ))
         }

@@ -1,6 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 import SLIDER from "../../image/image9.png";
+
 const Slide = () => {
   const settings = {
     dots: false,
