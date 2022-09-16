@@ -34,7 +34,7 @@
 
 .slice-image1 img {
   width: 100% !important;
-  padding: 0 15px;
+  padding: 0 8px;
 
 }
 
@@ -379,5 +379,12 @@ li{
   color: #1A1A1A !important;
 }
 
+.shopping-cart {
+  cursor: pointer;
+}
+
+.btn-add{
+  margin-top: 15px;
+}
 
 

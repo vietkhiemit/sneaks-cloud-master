@@ -4,11 +4,9 @@ import "antd/dist/antd.css";
 import { Routes, Route, } from "react-router-dom";
 import WebsiteLayout from "./pages/layouts/WebsiteLayout";
 import HomePage from "./pages/Home";
-import CartPage from "./components/Cart/CartPage";
 import { ToastContainer, toast } from "react-toastify";
 import SlideScoll from "./components/slider/SlideScroll";
-import ProductDetail from "./components/productPage/productDetail";
-
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -19,9 +17,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path={'products'}>
             <Route index element={<SlideScoll />} />
-            <Route path={':id'} element={<ProductDetail />} />
           </Route>
-          <Route path='cart' element={<CartPage />} />
         </Route>
       </Routes>
       <ToastContainer />

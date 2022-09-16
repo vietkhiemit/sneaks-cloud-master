@@ -17,7 +17,7 @@ import FooterCommon from '../Footer/Footer';
 type ProductType = {
     id: string,
     title: string,
-    images: string,
+    image: string,
     price: number,
     description: string,
     category: string

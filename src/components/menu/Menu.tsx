@@ -4,6 +4,7 @@ import LOGO from '../../image/logo.png'
 import {
     SearchOutlined, ShoppingCartOutlined
 } from '@ant-design/icons';
+import ShoppingCart from '../Cart/CartPage';
 const { Header } = Layout;
 
 
@@ -54,7 +55,7 @@ const MenuCommon = () => {
                             display: 'flex', alignItems: 'center', marginLeft: '30px',
                         }}>
                             < SearchOutlined className='search_outlined' />
-                            <ShoppingCartOutlined className='shopping_cart_outlined' />
+                            <ShoppingCart />
                             <p>GİRİŞ YAP / ÜYE OL</p>
                         </div>
                     </div>

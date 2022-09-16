@@ -5,7 +5,7 @@ import SLIDER from "../../image/image9.png";
 const Slide = () => {
   const settings = {
     dots: false,
-    autoplay: true,
+    autoplay: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,

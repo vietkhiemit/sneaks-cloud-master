@@ -5,11 +5,13 @@ import Heart from '../../image/Heart.png'
 import { Link, NavLink } from "react-router-dom";
 import axios from "axios"
 import { getProducts } from "../../api/product";
+import { toast } from "react-toastify";
+import useCart from "../../hook/use-cart";
 
 type ProductType = {
   id: string,
   title: string,
-  images: string,
+  image: string,
   price: number,
   description: string,
   category: string
@@ -18,7 +20,7 @@ type ProductType = {
 
 const SlideScoll = () => {
   const [products, setProducts] = useState<ProductType[]>([])
-
+  const { addToCart } = useCart()
   const handleProducts = async () => {
     const response = await getProducts();
     setProducts(response.data);
@@ -73,7 +75,7 @@ const SlideScoll = () => {
             <Card
               hoverable
               style={{ width: 240 }}
-              cover={<img alt="example" src={product.images} width="265" height="320" />}
+              cover={<img alt="example" src={product.image} width="265" height="320" />}
               className="heart"
             >
               <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -83,6 +85,11 @@ const SlideScoll = () => {
                 </Link>
               </div>
               <img className="heart-icon" src={Heart} alt="" />
+              <Button
+                className="btn-add"
+                type="primary"
+                onClick={() => addToCart(product, () => { toast('Thêm thành công') })}
+              >Add To Cart</Button>
             </Card>
           </div>
 
