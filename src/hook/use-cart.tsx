@@ -1,4 +1,3 @@
-import swr, { mutate } from 'swr';
 
 const useCart = () => {
   let cart: any = [];
@@ -13,6 +12,7 @@ const useCart = () => {
   }
 
   const addToCart = (newProduct: any, next: () => void) => {
+    getCart()
     const existProduct = cart.find((product: any) => product.id === newProduct.id);
     if (!existProduct) {
       cart.push({ ...newProduct, quantity: 1 });
@@ -28,6 +28,7 @@ const useCart = () => {
     localStorage.setItem('cart', JSON.stringify(cart));
     next();
   };
+
   const decreaseItemInCart = (id: any, next: () => void) => {
     const currenProduct = cart.find((product: any) => product.id === id);
     currenProduct.quantity--;
@@ -43,13 +44,16 @@ const useCart = () => {
     localStorage.setItem('cart', JSON.stringify(cart));
     next();
   };
+
   const removeItemInCart = (id: number) => {
+    getCart()
     const confirm = window.confirm('Bạn có muốn xóa sản phẩm này không?');
     if (confirm) {
       cart = cart.filter((item: any) => item.id !== id);
     }
     localStorage.setItem('cart', JSON.stringify(cart));
   }
+
   return {
     getCart,
     addToCart,

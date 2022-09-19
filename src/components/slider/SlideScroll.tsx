@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { Card, Button } from "antd";
 import Heart from '../../image/Heart.png'
-import { Link, NavLink } from "react-router-dom";
 import axios from "axios"
 import { getProducts } from "../../api/product";
 import { toast } from "react-toastify";
@@ -79,10 +78,7 @@ const SlideScoll = () => {
               className="heart"
             >
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Link to={`/products/${product.id}`}>
-                  <Meta title={product.title} description={product.price} />
-                  <Meta title="TL" />
-                </Link>
+                <Meta title={product.title} description={product.price} />
               </div>
               <img className="heart-icon" src={Heart} alt="" />
               <Button

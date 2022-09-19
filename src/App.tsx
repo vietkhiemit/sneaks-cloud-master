@@ -7,6 +7,7 @@ import HomePage from "./pages/Home";
 import { ToastContainer, toast } from "react-toastify";
 import SlideScoll from "./components/slider/SlideScroll";
 import 'react-toastify/dist/ReactToastify.css';
+import "bootstrap/dist/css/bootstrap.min.css"
 
 function App() {
 

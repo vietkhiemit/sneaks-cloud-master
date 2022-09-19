@@ -1,15 +1,8 @@
-let cart: any[] = [];
-if (localStorage.getItem("cart")) {
-    cart = JSON.parse(localStorage.getItem("cart") as string);
-}
+const CURRENCY_FORMATTER = new Intl.NumberFormat(undefined, {
+    currency: "USD",
+    style: "currency",
+})
 
-export const addToCart = (newProduct: any, next: () => void) => {
-    const existProduct = cart.find((product) => product.id === newProduct.id);
-    if (!existProduct) {
-        cart.push(newProduct);
-    } else {
-        existProduct.quantity++;
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    next();
-};
+export function formatCurrency(number: number) {
+    return CURRENCY_FORMATTER.format(number)
+}

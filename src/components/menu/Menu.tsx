@@ -61,7 +61,6 @@ const MenuCommon = () => {
                     </div>
                 </Header>
             </Layout >
-            <hr />
 
         </>
     )
