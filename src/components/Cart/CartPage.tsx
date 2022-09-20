@@ -15,10 +15,17 @@ type Props = {};
 
 const ShoppingCart = (props: Props) => {
     const [open, setOpen] = useState(false);
-    const [cartItem, setCartItem] = useState<any[]>([])
 
-    let carts: any = [];
-    carts = JSON.parse(localStorage.getItem("cart") as string);
+
+
+    const {
+        cart,
+        getCart,
+        increaseItemInCart,
+        decreaseItemInCart,
+        removeItemInCart,
+    } = useCart();
+
     let total = 0;
 
     const showDrawer = () => {
@@ -30,25 +37,15 @@ const ShoppingCart = (props: Props) => {
         setOpen(false);
     };
 
-    const {
-        cart,
-        getCart,
-        increaseItemInCart,
-        decreaseItemInCart,
-        removeItemInCart,
-    } = useCart();
-
     var cartItemMap = getCart();
-    // useEffect(() => {
-    //     const carts: any = cart
-    //     setCartItem(carts);
-    // }, [cart])
+
     const increase = (id: any) => {
         increaseItemInCart(id, () => { toast('Thêm số lượng thành công') })
     }
     const decrease = (id: any) => {
         decreaseItemInCart(id, () => { toast('Giảm số lượng thành công') })
     }
+
 
     return (
         <>
@@ -68,7 +65,7 @@ const ShoppingCart = (props: Props) => {
                         </Button>
                     </Space>
                 }>
-                {carts.map((item: ProductType) => (
+                {cartItemMap.map((item: ProductType) => (
                     <div className="d-flex align-items-center">
                         <img src={item.image} alt="" width={80} />
                         <div className="me-auto">
@@ -85,11 +82,11 @@ const ShoppingCart = (props: Props) => {
                                 <div>
                                     <span className='pe-3'>
                                         <MinusOutlined
-                                            onClick={() => { decrease(item.id) }} />
+                                            onClick={(e) => { decrease(item.id) }} />
                                     </span>
                                     <span>
                                         <PlusOutlined
-                                            onClick={() => { increase(item.id) }}
+                                            onClick={(e) => { increase(item.id) }}
                                         />
                                     </span>
                                 </div>
@@ -105,12 +102,12 @@ const ShoppingCart = (props: Props) => {
                             onClick={() => removeItemInCart(item.id)}
                         />
                         <p hidden>
-                            {formatCurrency(total += item.price * item.quantity)}
+                            {total += item.price * item.quantity}
                         </p>
                     </div>
 
                 ))}
-                <h3 className='mt-3 text-muted float-end'>Total: ${total}</h3>
+                <h3 className='mt-3 text-muted float-end'>Total: ${formatCurrency(total)}</h3>
             </Drawer>
         </>
     );

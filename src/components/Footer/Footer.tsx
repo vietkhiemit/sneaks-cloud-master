@@ -1,9 +1,9 @@
 import React from 'react'
-import Phone from '../image/Phone.png'
-import Android from '../image/GooglePlay.png'
-import AppStore from '../image/AppStore.png'
-import ImgPhone from '../image/image15.png'
-import ImgPhone1 from '../image/image13.png'
+import Phone from '../../image/Phone.png'
+import Android from '../../image/GooglePlay.png'
+import AppStore from '../../image/AppStore.png'
+import ImgPhone from '../../image/image15.png'
+import ImgPhone1 from '../../image/image13.png'
 type Props = {}
 
 const FooterCommon = (props: Props) => {

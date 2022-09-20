@@ -12,7 +12,7 @@ import ProductCart from '../components/productCart/ProductCart';
 import InstaImage from '../components/instaImage/InstaImage';
 import ShoppingInfo from '../components/shoppingInfo/ShoppingInfo';
 import HeadBottom from '../components/HeadBottom/HeadBottom';
-import FooterCommon from '../Footer/Footer';
+import FooterCommon from '../components/Footer/Footer';
 
 type ProductType = {
     id: string,

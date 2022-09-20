@@ -1,14 +1,16 @@
 
+
 const useCart = () => {
-  let cart: any = [];
+  let cart: any[] = [];
 
   const getCart = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && window.localStorage) {
       if (localStorage.getItem('cart')) {
         return cart = JSON.parse(localStorage.getItem('cart') as string)
       }
       return cart = []
     }
+
   }
 
   const addToCart = (newProduct: any, next: () => void) => {
@@ -53,6 +55,7 @@ const useCart = () => {
     }
     localStorage.setItem('cart', JSON.stringify(cart));
   }
+
 
   return {
     getCart,
