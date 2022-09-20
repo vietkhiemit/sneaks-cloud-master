@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import "antd/dist/antd.css";
 import { Routes, Route, } from "react-router-dom";
@@ -10,18 +10,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 
 function App() {
-  const [cartItem, setCartItem] = useState<any[]>([])
-  let cart: any = [];
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = cart;
-    setCartItem([]);
-  }, [cart]);
-
-  // useEffect(() => {
-  //   setCartItem(cart);
-  // })
-
   return (
     <div className="app">
       <Routes>

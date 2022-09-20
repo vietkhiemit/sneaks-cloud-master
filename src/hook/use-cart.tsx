@@ -1,7 +1,8 @@
 
-
+import { useEffect, useState } from 'react'
 const useCart = () => {
   let cart: any[] = [];
+  const [cartItem, setCartItem] = useState<any[]>([])
 
   const getCart = () => {
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -26,6 +27,7 @@ const useCart = () => {
   };
 
   const increaseItemInCart = (id: any, next: () => void) => {
+    setCartItem([])
     cart.find((product: any) => product.id === id).quantity++;
     localStorage.setItem('cart', JSON.stringify(cart));
     next();
@@ -34,6 +36,7 @@ const useCart = () => {
   const decreaseItemInCart = (id: any, next: () => void) => {
     const currenProduct = cart.find((product: any) => product.id === id);
     currenProduct.quantity--;
+    setCartItem([])
     // nếu sản phẩm giảm nhỏ hơn 1 thì xóa
     if (currenProduct.quantity < 1) {
       const confirm = window.confirm('Bạn có muốn xóa sản phẩm này không?');
@@ -49,13 +52,13 @@ const useCart = () => {
 
   const removeItemInCart = (id: number) => {
     getCart()
+    setCartItem([])
     const confirm = window.confirm('Bạn có muốn xóa sản phẩm này không?');
     if (confirm) {
       cart = cart.filter((item: any) => item.id !== id);
     }
     localStorage.setItem('cart', JSON.stringify(cart));
   }
-
 
   return {
     getCart,
