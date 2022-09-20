@@ -28,7 +28,7 @@ const Partners = (props: Props) => {
                 <div className="img1">
                     <img src={Image8} alt="" />
                 </div>
-                <div className="img1">
+                <div className="img3">
                     <img src={Kisspng} alt="" />
                 </div>
                 <div className="img1">

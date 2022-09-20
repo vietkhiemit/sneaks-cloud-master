@@ -111,6 +111,10 @@
   margin-left: 70px;
   padding: 0px 30px;
 }
+.img3 {
+  padding: 0px 30px;
+  margin-top: 10px;
+}
 
 .banner-bottom {
   width: 100%;
@@ -188,6 +192,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0px 10px;
+  
   /* Inside auto layout */
 }
 
